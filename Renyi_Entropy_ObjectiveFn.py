@@ -25,6 +25,7 @@ def Renyi(Thresholds,image):
 
     for i in range(len(Thresholds)-1):
         cumulative_class_sum=(sum(hist[Thresholds[i]+1:Thresholds[i + 1]+1]))
+        H=0
         for j in range(Thresholds[i+1]+1):
             H+=(hist[j]/cumulative_class_sum)**alpha
         H_alpha.append((1/(1-alpha))*log(H))
