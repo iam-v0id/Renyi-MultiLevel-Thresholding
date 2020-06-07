@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image
 from math import log
+import sys.float_info.epsilon as eps
 
 def Renyi(Thresholds,image):
     Thresholds.append(255)
@@ -24,10 +25,10 @@ def Renyi(Thresholds,image):
     H_alpha=[]
 
     for i in range(len(Thresholds)-1):
-        cumulative_class_sum=(sum(hist[Thresholds[i]+1:Thresholds[i + 1]+1]))
+        cumulative_class_sum=(sum(hist[Thresholds[i]+1:Thresholds[i + 1]+1]))+eps
         H=0
         for j in range(Thresholds[i+1]+1):
             H+=(hist[j]/cumulative_class_sum)**alpha
-        H_alpha.append((1/(1-alpha))*log(H))
+        H_alpha.append((1/(1-alpha))*log(H+eps))
     
     return(sum(H_alpha))
